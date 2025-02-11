@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
-import SignIn from '../components/SignIn';
+import SignIn from '../components/signin';
+import Welcome from '../components/welcome';
 
 export default function App() {
     //global state variables
@@ -11,7 +12,7 @@ export default function App() {
   return (
     <View style={styles.container}>
         {isLoggedIn ? (
-            <Text>Welcome, {username}!</Text>
+            <Welcome username={username}/>
         ) : (
             <SignIn
                 setIsLoggedIn={setIsLoggedIn}
