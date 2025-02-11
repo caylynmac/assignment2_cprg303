@@ -12,7 +12,7 @@ export default function App() {
   return (
     <View style={styles.container}>
         {isLoggedIn ? (
-            <Welcome/>
+            <Welcome username={username}/>
         ) : (
             <SignIn
                 setIsLoggedIn={setIsLoggedIn}

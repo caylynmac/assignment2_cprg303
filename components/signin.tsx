@@ -16,6 +16,7 @@ type SigninProps = {
   }) => {
     const [password, setPassword] = useState<string>("");
 
+    // commented out and moved to handleSignIn because the alert appeared after every character was typed
     //check username/password are at least 5/8 characters long
     // useEffect(() => {
     //     if (username.length < 5) {
@@ -50,13 +51,17 @@ type SigninProps = {
         const user = credentials.users.find((user) => user.username === username && user.password === password);
         if (user) {
             setIsLoggedIn(true);
-        } else {
+        }
+        else {
             alert("Invalid username or password.");
         }
     };
     
     return(
         <View style={styles.container}>
+            <Text>For testing use: </Text>
+            <Text>Username: janeSmith </Text>
+            <Text>Password: Secure!456 </Text>
             <TextInput
                 placeholder="Username"
                 onChangeText={setUsername}
