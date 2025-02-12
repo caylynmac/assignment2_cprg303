@@ -70,26 +70,27 @@ const Signin: React.FC<SigninProps> = ({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         padding: 16,
-        backgroundColor: "#f4f4f9", // soft background color
+        backgroundColor: "#f4f4f9",
+        marginTop: 30,
     },
     heading: {
         fontSize: 30,
         fontWeight: "bold",
         color: "#333",
-        marginBottom: 24,
+        marginBottom: 5,
     },
     subheading: {
         fontSize: 18,
         color: "#555",
-        marginBottom: 8,
+        marginBottom: 10,
     },
     credentials: {
         fontSize: 16,
         color: "#888",
-        marginBottom: 16,
+        marginBottom: 12,
     },
     input: {
         width: 280,
@@ -101,14 +102,15 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         fontSize: 16,
         color: "#333",
+        marginTop: 20,
     },
     buttonContainer: {
         width: 280,
         backgroundColor: "#007bff",
-        borderRadius: 6,
+        borderRadius: 8,
         overflow: "hidden",
     },
 });
 
-export default Signin;
 
+export default Signin;
