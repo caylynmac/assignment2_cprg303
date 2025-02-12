@@ -1,67 +1,51 @@
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import credentials from "../credentials.json";
-import { Link, useRouter } from "expo-router";
 
 type SigninProps = {
     setIsLoggedIn: (isLoggedIn: boolean) => void;
     username: string;
     setUsername: (username: string) => void;
-  };
+};
 
-  const Signin: React.FC<SigninProps> = ({
+const Signin: React.FC<SigninProps> = ({
     setIsLoggedIn,
     username,
     setUsername,
-  }) => {
+}) => {
     const [password, setPassword] = useState<string>("");
-
-    // commented out and moved to handleSignIn because the alert appeared after every character was typed
-    //check username/password are at least 5/8 characters long
-    // useEffect(() => {
-    //     if (username.length < 5) {
-    //         alert("Username must be be at least 5 characters long.");
-    //         return;
-    //     }
-    // }, [username]);
-
-    // useEffect(() => {
-    //     if (password.length < 8) {
-    //         alert("Password must be be at least 5 characters long.");
-    //         return;
-    //     }
-    // }, [password]);
 
     const handleSignIn = () => {
         if (username.length < 5) {
-            alert("Username must be be at least 5 characters long.");
+            alert("Username must be at least 5 characters long.");
             return;
         }
         if (password.length < 8) {
-            alert("Password must be be at least 8 characters long.");
+            alert("Password must be at least 8 characters long.");
             return;
         }
-        // check password includes at least one uppercase letter, one lowercase letter, one number, and one special character.
         if (!/(?=.*[a-z])/.test(password)) {
-            alert("Password must include at least one lowercase letter, uppercase letter, number, and special character each.");
+            alert("Password must include at least one lowercase letter, uppercase letter, number, and special character.");
             return;
         }
 
-        //checks if user exists in credentials
-        const user = credentials.users.find((user) => user.username === username && user.password === password);
+        const user = credentials.users.find(
+            (user) => user.username === username && user.password === password
+        );
         if (user) {
             setIsLoggedIn(true);
-        }
-        else {
+        } else {
             alert("Invalid username or password.");
         }
     };
-    
-    return(
+
+    return (
         <View style={styles.container}>
-            <Text>For testing use: </Text>
-            <Text>Username: janeSmith </Text>
-            <Text>Password: Secure!456 </Text>
+            <Text style={styles.heading}>Sign In</Text>
+            <Text style={styles.subheading}>For testing use:</Text>
+            <Text style={styles.credentials}>Username: janeSmith</Text>
+            <Text style={styles.credentials}>Password: Secure!456</Text>
+            
             <TextInput
                 placeholder="Username"
                 onChangeText={setUsername}
@@ -73,18 +57,58 @@ type SigninProps = {
                 onChangeText={setPassword}
                 value={password}
                 style={styles.input}
+                secureTextEntry
             />
-            <Button title="Sign In" onPress={handleSignIn} />
+            
+            <View style={styles.buttonContainer}>
+                <Button title="Sign In" onPress={handleSignIn} color="#fff" />
+            </View>
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: "center", alignItems: "center" },
-    heading: { fontSize: 24, marginBottom: 24 },
-    text: { fontSize: 16, marginBottom: 16 },
-        button: { padding: 16, backgroundColor: "blue", color: "white" },
-        input: { padding: 16, marginBottom: 16, backgroundColor: "#f9f9f9", width: 200, borderColor: "black", borderWidth: 1 },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 16,
+        backgroundColor: "#f4f4f9", // soft background color
+    },
+    heading: {
+        fontSize: 30,
+        fontWeight: "bold",
+        color: "#333",
+        marginBottom: 24,
+    },
+    subheading: {
+        fontSize: 18,
+        color: "#555",
+        marginBottom: 8,
+    },
+    credentials: {
+        fontSize: 16,
+        color: "#888",
+        marginBottom: 16,
+    },
+    input: {
+        width: 280,
+        padding: 12,
+        marginBottom: 16,
+        backgroundColor: "#fff",
+        borderColor: "#ddd",
+        borderWidth: 1,
+        borderRadius: 6,
+        fontSize: 16,
+        color: "#333",
+    },
+    buttonContainer: {
+        width: 280,
+        backgroundColor: "#007bff",
+        borderRadius: 6,
+        overflow: "hidden",
+    },
 });
 
 export default Signin;
+
