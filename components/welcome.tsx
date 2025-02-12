@@ -2,25 +2,19 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import CityTab from './components/CityTab';
+import CityTab from "./citytab";
 
 type WelcomeProps = { username: string };
-
-const Welcome: React.FC<WelcomeProps> = ({ username }) => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.welcomeText}>Welcome {username}!</Text>
-        </View>
-    );
-};
-
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+const Welcome: React.FC<WelcomeProps> = ({ username }) => {
+    
     return (
-        <NavigationContainer>
+
             <View style={{ flex: 1 }}>
-                <Welcome username="User" />
+                <View style={styles.container}>
+                    <Text style={styles.welcomeText}>Welcome {username}!</Text>
+                </View>
                 <Tab.Navigator>
                     <Tab.Screen name="Calgary">
                         {() => (
@@ -44,7 +38,7 @@ export default function App() {
                     </Tab.Screen>
                 </Tab.Navigator>
             </View>
-        </NavigationContainer>
+
     );
 }
 
@@ -60,3 +54,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
+export default Welcome;
